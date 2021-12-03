@@ -1,5 +1,7 @@
 <?php
 
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +19,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Email Route
+Route::get('/mail', function(){
+	Mail::to('hannhtay@arakan.army')->send(new WelcomeMail());
+	return new WelcomeMail();
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -31,4 +39,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 	Route::get('{page}', ['as' => 'page.index', 'uses' => 'App\Http\Controllers\PageController@index']);
 });
+
+
 
