@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EnrollmentController;
+use App\Http\Controllers\NewsLetterController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -9,6 +10,9 @@ Route::get('/sendnotify', [EnrollmentController::class, 'sendNotification']);
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/newsletter', [NewsLetterController::class, 'index']);
+Route::post('/newsletter', [NewsLetterController::class, 'store']);
 
 Auth::routes();
 
